@@ -9,8 +9,8 @@
                 <div class="card-body">
 
                     <form method="POST" action="{{route('firm.update',[$firm])}}">
-                        Name: <input type="text" name="firm_name" value="{{$firm->name}}">
-                        Address: <input type="text" name="firm_address" value="{{$firm->address}}">
+                        Name: <input type="text" name="firm_name" value="{{old('firm_name', $firm->name)}}">
+                        Address: <input type="text" name="firm_address" value="{{old('firm_address', $firm->address)}}">
                         @csrf
                         <button type="submit">EDIT</button>
                     </form>

@@ -9,8 +9,8 @@
                 <div class="card-body">
 
                     <form method="POST" action="{{route('firm.store')}}">
-                        Name: <input type="text" name="firm_name">
-                        Address: <input type="text" name="firm_address">
+                        Name: <input type="text" name="firm_name" value="{{old('firm_name')}}">
+                        Address: <input type="text" name="firm_address" value="{{old('firm_address')}}">
                         @csrf
                         <button type="submit">ADD</button>
                     </form>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 use App\Firm;
+use Validator;
 
 class CustomerController extends Controller
 {
@@ -57,6 +58,20 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'customer_name' => ['required', 'min:3', 'max:32'],
+            'customer_surname' => ['required', 'min:3', 'max:32'],
+            'customer_phone' => ['required','digits_between:3,24'],
+            'customer_email' => ['required','email', 'min:3', 'max:64'],
+        ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->route('customer.create')->withErrors($validator);
+        }
+ 
+
         $customer = new Customer;
         $customer->name = $request->customer_name;
         $customer->surname = $request->customer_surname;
@@ -100,6 +115,19 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'customer_name' => ['required', 'min:3', 'max:32'],
+            'customer_surname' => ['required', 'min:3', 'max:32'],
+            'customer_phone' => ['required','digits_between:3,24'],
+            'customer_email' => ['required','email', 'min:3', 'max:64'],
+        ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->route('customer.edit', ['customer' => $customer])->withErrors($validator);
+        }
+
         $customer->name = $request->customer_name;
         $customer->surname = $request->customer_surname;
         $customer->phone = $request->customer_phone;
