@@ -19,19 +19,17 @@ class CustomerController extends Controller
         $firms = Firm::all();
         if ($filter) {
             $customers = Customer::where('firm_id', $filter)->get();
-
         } else {
             $customers = Customer::all();
         }
 
-        
+
         return view('customer.index', [
             'customers' => $customers,
             'firms' => $firms,
             'filter' => $filter ?? 0
 
         ]);
- 
     }
 
     /**
@@ -62,7 +60,6 @@ class CustomerController extends Controller
         $customer->firm_id = $request->firm_id;
         $customer->save();
         return redirect()->route('customer.index')->with('success_message', 'Sekmingai įrašytas.');
- 
     }
 
     /**
@@ -86,7 +83,6 @@ class CustomerController extends Controller
     {
         $firms = Firm::all();
         return view('customer.edit', ['customer' => $customer, 'firms' => $firms]);
- 
     }
 
     /**
@@ -106,7 +102,6 @@ class CustomerController extends Controller
         $customer->firm_id = $request->firm_id;
         $customer->save();
         return redirect()->route('customer.index')->with('success_message', 'Sėkmingai pakeistas.');
- 
     }
 
     /**
@@ -119,6 +114,5 @@ class CustomerController extends Controller
     {
         $customer->delete();
         return redirect()->route('customer.index')->with('success_message', 'Sekmingai ištrintas.');
- 
     }
 }

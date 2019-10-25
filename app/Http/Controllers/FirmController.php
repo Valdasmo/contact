@@ -16,7 +16,6 @@ class FirmController extends Controller
     {
         $firms = Firm::all();
         return view('firm.index', ['firms' => $firms]);
- 
     }
 
     /**
@@ -79,7 +78,6 @@ class FirmController extends Controller
         $firm->address = $request->firm_address;
         $firm->save();
         return redirect()->route('firm.index')->with('success_message', 'Sėkmingai pakeistas.');
- 
     }
 
     /**
@@ -90,12 +88,11 @@ class FirmController extends Controller
      */
     public function destroy(Firm $firm)
     {
-        if($firm->firmCustomers->count()){
+        if ($firm->firmCustomers->count()) {
             return redirect()->route('firm.index')->with('info_message', 'Trinti negalima, nes yra klientų.');
         }
- 
+
         $firm->delete();
         return redirect()->route('firm.index')->with('success_message', 'Sekmingai ištrintas.');
- 
     }
 }
