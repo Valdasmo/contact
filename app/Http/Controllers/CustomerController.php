@@ -16,8 +16,14 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $filter = $request->get('filter', '');
+        $sort = $request->get('sort', '');
         $firms = Firm::all();
-        if ($filter) {
+
+        if ($sort == 'a-z') {
+            $customers = Customer::orderBy('surname')->get();
+        } else if ($sort == 'z-a') {
+            $customers = Customer::orderBy('surname', 'desc')->get();
+        } else if ($filter) {
             $customers = Customer::where('firm_id', $filter)->get();
         } else {
             $customers = Customer::all();
