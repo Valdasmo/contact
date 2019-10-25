@@ -58,19 +58,20 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),
-        [
-            'customer_name' => ['required', 'min:3', 'max:32'],
-            'customer_surname' => ['required', 'min:3', 'max:32'],
-            'customer_phone' => ['required','digits_between:3,24'],
-            'customer_email' => ['required','email', 'min:3', 'max:64'],
-        ]
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'customer_name' => ['required', 'min:3', 'max:32'],
+                'customer_surname' => ['required', 'min:3', 'max:32'],
+                'customer_phone' => ['required', 'digits_between:3,24'],
+                'customer_email' => ['required', 'email', 'min:3', 'max:64'],
+            ]
         );
         if ($validator->fails()) {
             $request->flash();
             return redirect()->route('customer.create')->withErrors($validator);
         }
- 
+
 
         $customer = new Customer;
         $customer->name = $request->customer_name;
@@ -115,13 +116,14 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        $validator = Validator::make($request->all(),
-        [
-            'customer_name' => ['required', 'min:3', 'max:32'],
-            'customer_surname' => ['required', 'min:3', 'max:32'],
-            'customer_phone' => ['required','digits_between:3,24'],
-            'customer_email' => ['required','email', 'min:3', 'max:64'],
-        ]
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'customer_name' => ['required', 'min:3', 'max:32'],
+                'customer_surname' => ['required', 'min:3', 'max:32'],
+                'customer_phone' => ['required', 'digits_between:3,24'],
+                'customer_email' => ['required', 'email', 'min:3', 'max:64'],
+            ]
         );
         if ($validator->fails()) {
             $request->flash();

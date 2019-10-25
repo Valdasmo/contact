@@ -37,17 +37,18 @@ class FirmController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),
-        [
-            'firm_name' => ['required', 'min:3', 'max:64'],
-            'firm_address' => ['required', 'min:3', 'max:64'],
-        ]
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'firm_name' => ['required', 'min:3', 'max:64'],
+                'firm_address' => ['required', 'min:3', 'max:64'],
+            ]
         );
         if ($validator->fails()) {
             $request->flash();
             return redirect()->route('firm.create')->withErrors($validator);
         }
- 
+
 
         $firm = new Firm;
         $firm->name = $request->firm_name;
@@ -87,11 +88,12 @@ class FirmController extends Controller
      */
     public function update(Request $request, Firm $firm)
     {
-        $validator = Validator::make($request->all(),
-        [
-            'firm_name' => ['required', 'min:3', 'max:64'],
-            'firm_address' => ['required', 'min:3', 'max:64'],
-        ]
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'firm_name' => ['required', 'min:3', 'max:64'],
+                'firm_address' => ['required', 'min:3', 'max:64'],
+            ]
         );
         if ($validator->fails()) {
             $request->flash();
